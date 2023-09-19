@@ -7,26 +7,13 @@ def substrings(text, dictionary)
     end
 
     # Define new Hash
-    hash = {}
+    hash = Hash.new(0)
+    text = text.downcase
 
     # Iterate over each word
     dictionary.each do |word|
-        counter = 0
-        text.each_char do |char|
-
-            # Downcase both word and char
-            char = char.downcase
-            word = word.downcase
-
-            if char == word[counter]
-                if counter == word.length - 1
-                    hash.include?(word) ? hash[word] += 1 : hash[word] = 1
-                end
-                counter += 1
-            else 
-                counter = 0 
-            end
-        end
+        matches = text.scan(word).length
+        hash[word] = matches unless matches == 0
     end
 
     # Print and return has
